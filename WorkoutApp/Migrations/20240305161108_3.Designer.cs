@@ -10,8 +10,8 @@ using WorkoutApp.Data;
 namespace WorkoutApp.Migrations
 {
     [DbContext(typeof(WorkoutContext))]
-    [Migration("20240305144421_InitialCommit")]
-    partial class InitialCommit
+    [Migration("20240305161108_3")]
+    partial class _3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,9 +44,32 @@ namespace WorkoutApp.Migrations
                     b.ToTable("Exercise");
                 });
 
+            modelBuilder.Entity("WorkoutApp.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("WorkoutApp.Models.Workout", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -74,10 +97,12 @@ namespace WorkoutApp.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("User")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Workout");
                 });
@@ -105,7 +130,41 @@ namespace WorkoutApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("WorkoutId");
+
                     b.ToTable("Workout_Exercise");
+                });
+
+            modelBuilder.Entity("WorkoutApp.Models.Workout", b =>
+                {
+                    b.HasOne("WorkoutApp.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WorkoutApp.Models.WorkoutExercise", b =>
+                {
+                    b.HasOne("WorkoutApp.Models.Exercise", "Exercise")
+                        .WithMany()
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkoutApp.Models.Workout", "Workout")
+                        .WithMany()
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("Workout");
                 });
 #pragma warning restore 612, 618
         }

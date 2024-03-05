@@ -4,7 +4,7 @@ namespace WorkoutApp.Models
 {
     public class Workout
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Duration { get; set; }
@@ -12,8 +12,9 @@ namespace WorkoutApp.Models
         public string Equipment { get; set; }
         public string Target_Muscle { get; set; }
 
-        [ForeignKey("UserId")]
-        public int User {  get; set; }
+        public int UserId { get; set; }
 
+        [ForeignKey("UserId")]
+        public User User { get; set; } 
     }
 }
