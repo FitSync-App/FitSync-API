@@ -14,8 +14,8 @@ namespace WorkoutApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-        const string connectionString = "Server=studmysql01.fhict.local; Port=3306;Database=dbi515670;User=dbi515670;Password=Tua1X#TbOS;";
-        optionsBuilder.UseSqlServer(connectionString);
+            string connectionString = "Server=localhost;Database=test2;Uid=root;";
+            optionsBuilder.UseMySQL(connectionString);
         }
     }
 }
