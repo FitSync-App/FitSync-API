@@ -12,10 +12,17 @@ namespace WorkoutApp.Data
         public DbSet<Exercise> Exercise { get; set; }
         public DbSet<WorkoutExercise> Workout_Exercise { get; set; }
         public DbSet<User> User { get; set; }
+
+        private readonly IConfiguration _connectionstring;
+
+        public WorkoutContext(IConfiguration connectionstring)
+        {
+            _connectionstring = connectionstring;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = "Server=localhost;Database=test2;Uid=root;";
-            optionsBuilder.UseMySQL(connectionString);
+            optionsBuilder.UseMySQL(_connectionstring.GetConnectionString("DatabaseConnection"));
         }
     }
 }

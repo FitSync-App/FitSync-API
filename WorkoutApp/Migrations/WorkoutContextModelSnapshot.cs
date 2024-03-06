@@ -38,7 +38,7 @@ namespace WorkoutApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exercise");
+                    b.ToTable("Exercise", (string)null);
                 });
 
             modelBuilder.Entity("WorkoutApp.Models.User", b =>
@@ -61,7 +61,7 @@ namespace WorkoutApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("WorkoutApp.Models.Workout", b =>
@@ -101,7 +101,7 @@ namespace WorkoutApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Workout");
+                    b.ToTable("Workout", (string)null);
                 });
 
             modelBuilder.Entity("WorkoutApp.Models.WorkoutExercise", b =>
@@ -131,7 +131,7 @@ namespace WorkoutApp.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("Workout_Exercise");
+                    b.ToTable("Workout_Exercise", (string)null);
                 });
 
             modelBuilder.Entity("WorkoutApp.Models.Workout", b =>
