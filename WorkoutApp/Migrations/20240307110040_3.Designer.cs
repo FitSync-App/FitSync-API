@@ -10,7 +10,7 @@ using WorkoutApp.Data;
 namespace WorkoutApp.Migrations
 {
     [DbContext(typeof(WorkoutContext))]
-    [Migration("20240305161108_3")]
+    [Migration("20240307110040_3")]
     partial class _3
     {
         /// <inheritdoc />
@@ -20,6 +20,21 @@ namespace WorkoutApp.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("WorkoutApp.Models.Equipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Equipment");
+                });
 
             modelBuilder.Entity("WorkoutApp.Models.Exercise", b =>
                 {
@@ -31,17 +46,38 @@ namespace WorkoutApp.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Target_Muscle")
+                    b.Property<int>("MuscleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EquipmentId");
+
+                    b.HasIndex("MuscleId");
+
                     b.ToTable("Exercise");
+                });
+
+            modelBuilder.Entity("WorkoutApp.Models.Muscle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Muscle");
                 });
 
             modelBuilder.Entity("WorkoutApp.Models.User", b =>
@@ -85,15 +121,7 @@ namespace WorkoutApp.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Equipment")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Target_Muscle")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -135,6 +163,25 @@ namespace WorkoutApp.Migrations
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("Workout_Exercise");
+                });
+
+            modelBuilder.Entity("WorkoutApp.Models.Exercise", b =>
+                {
+                    b.HasOne("WorkoutApp.Models.Equipment", "Equipment")
+                        .WithMany()
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkoutApp.Models.Muscle", "Muscle")
+                        .WithMany()
+                        .HasForeignKey("MuscleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Equipment");
+
+                    b.Navigation("Muscle");
                 });
 
             modelBuilder.Entity("WorkoutApp.Models.Workout", b =>

@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string Difficulty { get; set; }
-        public string Target_Muscle { get; set; }
+        public Equipment Equipment { get; set; }
+        public Muscle Muscle { get; set; }
     }
 }

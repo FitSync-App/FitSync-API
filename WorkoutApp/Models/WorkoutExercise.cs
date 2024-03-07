@@ -12,6 +12,5 @@ namespace WorkoutApp.Models
         public int Reps { get; set; }
         public Workout Workout { get; set; }
         public Exercise Exercise { get; set; }
-
     }
 }
