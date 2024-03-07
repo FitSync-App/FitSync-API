@@ -10,12 +10,7 @@ namespace WorkoutApp.Models
         public int Days {  get; set; }
         public int Sets { get; set; }
         public int Reps { get; set; }
-
-
-        [ForeignKey("WorkoutId")]
         public Workout Workout { get; set; }
-
-        [ForeignKey("ExerciseId")]
         public Exercise Exercise { get; set; }
 
     }

@@ -11,10 +11,7 @@ namespace WorkoutApp.Models
         public string Difficulty { get; set; }
         public string Equipment { get; set; }
         public string Target_Muscle { get; set; }
-
         public int UserId { get; set; }
-
-        [ForeignKey("UserId")]
         public User User { get; set; } 
     }
 }
