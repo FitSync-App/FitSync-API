@@ -18,7 +18,6 @@ namespace Fitsync.Data
         public DbSet<User> User { get; set; }
 
         private readonly IConfiguration _connectionstring;
-
         public WorkoutContext(IConfiguration connectionstring)
         {
             _connectionstring = connectionstring;
@@ -26,7 +25,7 @@ namespace Fitsync.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(_connectionstring.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseNpgsql(_connectionstring.GetConnectionString("DatabaseConnection"));
         }
 
 
