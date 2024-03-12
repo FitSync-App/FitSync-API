@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace WorkoutApp.Controllers
+namespace Fitsync.Controllers
 {
     [ApiController]
     [Route("[controller]")]

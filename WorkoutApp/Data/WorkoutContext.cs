@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations.Schema;
-using WorkoutApp.Models;
+using Fitsync.Models;
 
-namespace WorkoutApp.Data
+namespace Fitsync.Data
 {
     public class WorkoutContext : DbContext
     {
@@ -26,8 +26,10 @@ namespace WorkoutApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(_connectionstring.GetConnectionString("DatabaseConnection"));
+            optionsBuilder.UseNpgsql(_connectionstring.GetConnectionString("DefaultConnection"));
         }
+
+
 
     }
 }

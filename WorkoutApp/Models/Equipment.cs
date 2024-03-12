@@ -1,4 +1,4 @@
-﻿namespace WorkoutApp.Models
+﻿namespace Fitsync.Models
 {
     public class Equipment
     {
