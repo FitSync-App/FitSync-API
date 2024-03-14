@@ -10,7 +10,7 @@ using Fitsync.Data;
 
 namespace WorkoutApp.Migrations
 {
-    [DbContext(typeof(WorkoutContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20240312102617_1")]
     partial class _1
     {

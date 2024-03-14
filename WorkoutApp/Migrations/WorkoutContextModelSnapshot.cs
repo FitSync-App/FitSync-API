@@ -9,7 +9,7 @@ using Fitsync.Data;
 
 namespace WorkoutApp.Migrations
 {
-    [DbContext(typeof(WorkoutContext))]
+    [DbContext(typeof(DatabaseContext))]
     partial class WorkoutContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

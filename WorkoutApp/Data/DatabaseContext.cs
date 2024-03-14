@@ -6,7 +6,7 @@ using Fitsync.Models;
 
 namespace Fitsync.Data
 {
-    public class WorkoutContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<Workout> Workout { get; set; }
         public DbSet<Exercise> Exercise { get; set; }
@@ -18,7 +18,7 @@ namespace Fitsync.Data
         public DbSet<User> User { get; set; }
 
         private readonly IConfiguration _connectionstring;
-        public WorkoutContext(IConfiguration connectionstring)
+        public DatabaseContext(IConfiguration connectionstring)
         {
             _connectionstring = connectionstring;
         }
