@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Fitsync.Data;
 using Fitsync.Models;
+using static WorkoutGenerator;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Fitsync.Controllers
 {
@@ -15,10 +17,14 @@ namespace Fitsync.Controllers
     public class WorkoutController : ControllerBase
     {
         private readonly DatabaseContext _context;
+        private readonly WorkoutGenerator _workoutGenerator;
 
-        public WorkoutController(DatabaseContext context)
+
+        public WorkoutController(DatabaseContext context, WorkoutGenerator workoutGenerator)
         {
             _context = context;
+            _workoutGenerator = workoutGenerator;
+
         }
 
         // GET: api/Workout
@@ -120,5 +126,27 @@ namespace Fitsync.Controllers
         {
             return (_context.Workout?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
+        //[HttpPost("generate")]
+        //public IActionResult GenerateWorkout(string name, MuscleGroup targetMuscleGroup)
+        //{
+        //    // Validate parameters
+        //    if (targetMuscleGroup == null)
+        //    {
+        //        return BadRequest("Invalid parameters");
+        //    }
+
+        //    // Generate workout
+        //    var workout = _workoutGenerator.GenerateWorkout(targetMuscleGroup);
+
+        //    foreach(var test in workout)
+        //    {
+        //        _context.Workout.Add(test);
+        //    }
+
+        //    return Ok(workout);
+        //}
+
     }
 }

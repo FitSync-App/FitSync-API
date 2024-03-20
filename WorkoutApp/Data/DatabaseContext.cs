@@ -28,7 +28,5 @@ namespace Fitsync.Data
             optionsBuilder.UseNpgsql(_connectionstring.GetConnectionString("DatabaseConnection"));
         }
 
-
-
     }
 }
