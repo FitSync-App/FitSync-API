@@ -19,7 +19,6 @@ namespace Fitsync.Controllers
         private readonly DatabaseContext _context;
         private readonly WorkoutGenerator _workoutGenerator;
 
-
         public WorkoutController(DatabaseContext context, WorkoutGenerator workoutGenerator)
         {
             _context = context;
@@ -34,8 +33,8 @@ namespace Fitsync.Controllers
           if (_context.Workout == null)
           {
               return NotFound();
-          }
-            return await _context.Workout.ToListAsync();
+          } 
+          return await _context.Workout.ToListAsync();
         }
 
         // GET: api/Workout/5
@@ -58,33 +57,34 @@ namespace Fitsync.Controllers
 
         // PUT: api/Workout/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutWorkout(int id, Workout workout)
+
+        [HttpPost("UpdateWorkout")]
+        public async Task<IActionResult> UpdateWorkout(int id, string newName, string newDescription, string newDuration, string newDifficulty, int newUserId)
         {
-            if (id != workout.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(workout).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WorkoutExists(id))
+                var workoutToUpdate = await _context.Workout.FirstOrDefaultAsync(w => w.Id == id);
+
+                if (workoutToUpdate == null)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
+                workoutToUpdate.Name = newName;
+                workoutToUpdate.Description = newDescription;
+                workoutToUpdate.Duration = newDuration;
+                workoutToUpdate.Difficulty = newDifficulty;
+                workoutToUpdate.UserId = newUserId;
+
+                _context.Update(workoutToUpdate);
+                await _context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while updating the workout.");
+            }
         }
 
         // POST: api/Workout
@@ -95,8 +95,8 @@ namespace Fitsync.Controllers
           if (_context.Workout == null)
           {
               return Problem("Entity set 'DatabaseContext.Workout'  is null.");
-          }
-            _context.Workout.Add(workout);
+          } 
+          _context.Workout.Add(workout);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetWorkout", new { id = workout.Id }, workout);

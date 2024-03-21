@@ -120,5 +120,6 @@ namespace Fitsync.Controllers
         {
             return (_context.Exercise?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        
     }
 }
