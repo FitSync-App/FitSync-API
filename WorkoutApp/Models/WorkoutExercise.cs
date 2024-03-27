@@ -11,7 +11,6 @@ namespace Fitsync.Models
         public int Id { get; set; }
         public int WorkoutId { get; set; }
         public int ExerciseId { get; set; }
-        public int Days {  get; set; }
         public int Sets { get; set; }
         public int Reps { get; set; }
         public Workout Workout { get; set; }
@@ -51,7 +50,6 @@ public static class WorkoutExerciseEndpoints
                   .SetProperty(m => m.Id, workoutExercise.Id)
                   .SetProperty(m => m.WorkoutId, workoutExercise.WorkoutId)
                   .SetProperty(m => m.ExerciseId, workoutExercise.ExerciseId)
-                  .SetProperty(m => m.Days, workoutExercise.Days)
                   .SetProperty(m => m.Sets, workoutExercise.Sets)
                   .SetProperty(m => m.Reps, workoutExercise.Reps)
                   );
