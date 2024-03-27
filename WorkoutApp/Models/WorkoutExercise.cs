@@ -13,8 +13,8 @@ namespace Fitsync.Models
         public int ExerciseId { get; set; }
         public int Sets { get; set; }
         public int Reps { get; set; }
-        public Workout Workout { get; set; }
-        public Exercise Exercise { get; set; }
+        public Workout? Workout { get; set; }
+        public Exercise? Exercise { get; set; }
     }
 
 
@@ -58,16 +58,20 @@ public static class WorkoutExerciseEndpoints
         .WithName("UpdateWorkoutExercise")
         .WithOpenApi();
 
-        group.MapPost("/", async (WorkoutExercise workoutExercise, DatabaseContext db) =>
-        {
-            db.Workout_Exercise.Add(workoutExercise);
-            await db.SaveChangesAsync();
-            return TypedResults.Created($"/api/WorkoutExercise/{workoutExercise.Id}",workoutExercise);
-        })
-        .WithName("CreateWorkoutExercise")
-        .WithOpenApi();
+            group.MapPost("/", async (WorkoutExercise workoutExercise, DatabaseContext db) =>
+            {
+                // Remove the following lines to prevent adding workout and exercise to the database
+                // db.Workout_Exercise.Add(workoutExercise);
+                // await db.SaveChangesAsync();
 
-        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, DatabaseContext db) =>
+                // Your existing code to return the created workout exercise
+                return TypedResults.Created($"/api/WorkoutExercise/{workoutExercise.Id}", workoutExercise);
+            })
+    .WithName("CreateWorkoutExercise")
+    .WithOpenApi();
+
+
+            group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, DatabaseContext db) =>
         {
             var affected = await db.Workout_Exercise
                 .Where(model => model.Id == id)
