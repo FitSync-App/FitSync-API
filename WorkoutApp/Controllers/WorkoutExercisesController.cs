@@ -28,8 +28,8 @@ namespace Fitsync.Controllers
           if (_context.Workout_Exercise == null)
           {
               return NotFound();
-          }
-            return await _context.Workout_Exercise.ToListAsync();
+          } 
+          return await _context.Workout_Exercise.ToListAsync();
         }
 
         // GET: api/WorkoutExercises/5
@@ -39,8 +39,8 @@ namespace Fitsync.Controllers
           if (_context.Workout_Exercise == null)
           {
               return NotFound();
-          }
-            var workoutExercise = await _context.Workout_Exercise.FindAsync(id);
+          } 
+          var workoutExercise = await _context.Workout_Exercise.FindAsync(id);
 
             if (workoutExercise == null)
             {
@@ -89,9 +89,9 @@ namespace Fitsync.Controllers
           if (_context.Workout_Exercise == null)
           {
               return Problem("Entity set 'DatabaseContext.Workout_Exercise'  is null.");
-          }
-            _context.Workout_Exercise.Add(workoutExercise);
-            await _context.SaveChangesAsync();
+          } 
+          _context.Workout_Exercise.Add(workoutExercise); 
+          await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetWorkoutExercise", new { id = workoutExercise.Id }, workoutExercise);
         }
@@ -130,6 +130,19 @@ namespace Fitsync.Controllers
                 .ToList();
         }
 
+        [HttpGet("GetWorkoutsByUserId")]
+        public ActionResult<IEnumerable<WorkoutExercise>> GetWorkoutsByUserId(int userId)
+        {
+            var workoutExercises = _context.Workout_Exercise
+                .Where(we => we.Workout.UserId == userId)
+                .ToList();
 
+            if (workoutExercises == null || workoutExercises.Count == 0)
+            {
+                return NotFound("No workouts found for the specified user.");
+            }
+
+            return Ok(workoutExercises);
+        }
     }
 }

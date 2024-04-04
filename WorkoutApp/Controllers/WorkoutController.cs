@@ -44,8 +44,8 @@ namespace Fitsync.Controllers
           if (_context.Workout == null)
           {
               return NotFound();
-          }
-            var workout = await _context.Workout.FindAsync(id);
+          } 
+          var workout = await _context.Workout.FindAsync(id);
 
             if (workout == null)
             {
