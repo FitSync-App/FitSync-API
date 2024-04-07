@@ -135,7 +135,7 @@ namespace Fitsync.Controllers
         }
 
         [HttpGet("GetWorkoutsByUserId")]
-        public ActionResult<IEnumerable<WorkoutExercise>> GetWorkoutsByUserId(int userId)
+        public ActionResult<IEnumerable<WorkoutExercise>> GetWorkoutsByUserId(string userId)
         {
             var workoutExercises = _context.Workout_Exercise
                 .Include(we => we.Workout) // Include the Workout entity
