@@ -10,6 +10,5 @@ namespace Fitsync.Models
         public string Duration { get; set; }
         public string Difficulty { get; set; }
         public string UserId { get; set; }
-        public User User { get; set; } 
     }
 }
