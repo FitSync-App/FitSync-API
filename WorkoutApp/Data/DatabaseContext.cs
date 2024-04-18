@@ -13,8 +13,11 @@ namespace Fitsync.Data
         public DbSet<WorkoutExercise> Workout_Exercise { get; set; }
         public DbSet<Muscle> Muscle { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
+        
         public DbSet<ExerciseMuscle> Exercise_Muscle { get; set; }
+        
         public DbSet<ExerciseEquipment> Exercise_Equipment { get; set; }
+        
         public DbSet<User> User { get; set; }
 
         private readonly IConfiguration _connectionstring;
@@ -22,11 +25,9 @@ namespace Fitsync.Data
         {
             _connectionstring = connectionstring;
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            optionsBuilder.UseNpgsql(_connectionstring.GetConnectionString("DatabaseConnection"));
         }
-
     }
 }

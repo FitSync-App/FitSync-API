@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitsync", "WorkoutApp\Fitsync.csproj", "{659CA369-BC49-4634-9D46-84FF4141A1EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitSync_Tests", "FitSync_Tests\FitSync_Tests.csproj", "{68B1346F-AC79-434F-8424-1617DCCD180E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{659CA369-BC49-4634-9D46-84FF4141A1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{659CA369-BC49-4634-9D46-84FF4141A1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{659CA369-BC49-4634-9D46-84FF4141A1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B1346F-AC79-434F-8424-1617DCCD180E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B1346F-AC79-434F-8424-1617DCCD180E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B1346F-AC79-434F-8424-1617DCCD180E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B1346F-AC79-434F-8424-1617DCCD180E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
