@@ -58,7 +58,7 @@ namespace Fitsync.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
         [HttpPost("UpdateWorkout")]
-        public async Task<IActionResult> UpdateWorkout(int id, string newName, string newDescription, string newDuration, string newDifficulty, int newUserId)
+        public async Task<IActionResult> UpdateWorkout(int id, string newName, string newDescription, string newDuration, string newDifficulty, string newUserId)
         {
             try
             {
