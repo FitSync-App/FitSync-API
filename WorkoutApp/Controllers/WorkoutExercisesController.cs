@@ -135,22 +135,17 @@ namespace Fitsync.Controllers
         }
 
         [HttpGet("GetWorkoutsByUserId")]
-        public ActionResult<IEnumerable<WorkoutExercise>> GetWorkoutsByUserId(string userId)
+        public ActionResult<IEnumerable<WorkoutExercise>> GetWorkoutsByUserId(int userId)
         {
             var workoutExercises = _context.Workout_Exercise
-                .Include(we => we.Workout) 
+                .Include(we => we.Workout) // Include the Workout entity
                 .Where(we => we.Workout.UserId == userId)
                 .Select(we => new 
                 {
                     WorkoutName = we.Workout.Name, 
-                    WorkoutDescription = we.Workout.Description,
-                    WorkoutDuration = we.Workout.Duration,
-                    WorkoutDifficulty = we.Workout.Difficulty,
                     ExerciseName = we.Exercise.Name,
                     ExerciseDifficulty = we.Exercise.Difficulty,
                     ExerciseDescription = we.Exercise.Description,
-                    ExerciseSets = we.Sets,
-                    ExerciseReps = we.Reps,
                     Equipment = _context.Equipment
                         .Where(e => e.Id == we.Exercise.EquipmentId)
                         .Select(e => e.Name)
@@ -158,8 +153,7 @@ namespace Fitsync.Controllers
                     MuscleName = _context.Muscle
                         .Where(m => m.Id == we.Exercise.MuscleId)
                         .Select(m => m.Name)
-                        .FirstOrDefault()
-                    
+                        .FirstOrDefault() 
                 })
                 .ToList();
 
