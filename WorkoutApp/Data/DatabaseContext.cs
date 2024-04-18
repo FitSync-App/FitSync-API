@@ -20,14 +20,10 @@ namespace Fitsync.Data
         
         public DbSet<User> User { get; set; }
 
-        private readonly IConfiguration _connectionstring;
-        public DatabaseContext(IConfiguration connectionstring)
-        {
-            _connectionstring = connectionstring;
-        }
-        
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
+
+
     }
 }

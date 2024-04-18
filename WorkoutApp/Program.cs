@@ -1,7 +1,5 @@
 using Fitsync.Data;
 using Microsoft.EntityFrameworkCore;
-using Fitsync.Controllers;
-using Fitsync.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -22,8 +20,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
-builder.Services.AddScoped<WorkoutGenerator>();
+builder.Configuration.AddEnvironmentVariables(); 
+var databaseConnectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
+
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(databaseConnectionString));
 
 var app = builder.Build();
 
@@ -34,7 +34,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
-
 
 app.UseAuthorization();
 
