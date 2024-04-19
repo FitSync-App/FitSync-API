@@ -93,8 +93,8 @@ namespace Fitsync.Controllers
           {
               return Problem("Entity set 'DatabaseContext.Workout'  is null.");
           } 
-          _context.Workout.Add(workout);
-            await _context.SaveChangesAsync();
+          _context.Workout.Add(workout); 
+          await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetWorkout", new { id = workout.Id }, workout);
         }

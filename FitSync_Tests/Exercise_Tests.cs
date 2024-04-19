@@ -38,7 +38,6 @@ namespace FitSync_Tests
                 Assert.NotEmpty(result);
 
                 var exercise1 = result.FirstOrDefault(e => e.Name == "TestExercise1");
-                Assert.NotNull(exercise1);
                 Assert.Equal("TestExercise1", exercise1.Name);
                 Assert.Equal("Test", exercise1.Difficulty);
                 Assert.Equal(1, exercise1.MuscleId);
