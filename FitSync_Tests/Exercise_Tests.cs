@@ -43,5 +43,27 @@ namespace FitSync_Tests
                 Assert.Equal(1, exercise1.MuscleId);
             }
         }
+
+        [Fact]
+        public async Task CheckIfExerciseIsCreatedSuccessfully()
+        {
+            Exercise testExercise = new Exercise();
+            testExercise.Name = "TestExercise2";
+            testExercise.Difficulty = "Test";
+            testExercise.MuscleId = 1;
+
+            using (var context = CreateInMemoryContext())
+            {
+                context.Add(new Exercise() { Name = "TestExercise1", Difficulty = "Test", MuscleId = 1 });
+                context.SaveChanges();
+
+                ExercisesController exercisesController = new ExercisesController(context);
+                await exercisesController.PostExercise(testExercise);
+
+                var exercises = await context.Exercise.ToListAsync();
+
+                Assert.Contains(exercises, e => e.Name == testExercise.Name);
+            }
+        }
     }
 }
