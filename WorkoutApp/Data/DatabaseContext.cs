@@ -9,9 +9,13 @@ namespace Fitsync.Data
     public class DatabaseContext : DbContext
     {
         public DbSet<Workout> Workout { get; set; }
+
         public DbSet<Exercise> Exercise { get; set; }
+
         public DbSet<WorkoutExercise> Workout_Exercise { get; set; }
+
         public DbSet<Muscle> Muscle { get; set; }
+
         public DbSet<Equipment> Equipment { get; set; }
         
         public DbSet<ExerciseMuscle> Exercise_Muscle { get; set; }
@@ -23,7 +27,5 @@ namespace Fitsync.Data
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
-
-
     }
 }

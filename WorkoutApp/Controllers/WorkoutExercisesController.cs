@@ -138,7 +138,7 @@ namespace Fitsync.Controllers
         public ActionResult<IEnumerable<WorkoutExercise>> GetWorkoutsByUserId(string userId)
         {
             var workoutExercises = _context.Workout_Exercise
-                .Include(we => we.Workout) // Include the Workout entity
+                .Include(we => we.Workout) 
                 .Where(we => we.Workout.UserId == userId)
                 .Select(we => new 
                 {

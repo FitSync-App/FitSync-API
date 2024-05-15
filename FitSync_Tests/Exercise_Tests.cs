@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using System.Threading.Tasks;
+using Fitsync.Interfaces;
+using NuGet.ContentModel;
 
 namespace FitSync_Tests
 {
@@ -14,14 +16,14 @@ namespace FitSync_Tests
         private DatabaseContext CreateInMemoryContext()
         {
             var options = new DbContextOptionsBuilder<DatabaseContext>()
-                .UseInMemoryDatabase(databaseName: "Exercise")
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())  
                 .Options;
 
             return new DatabaseContext(options);
         }
 
         [Fact]
-        public async Task CheckIfDataIsCorrectlyReceived()
+        public async Task CheckIfExerciseDataIsCorrectlyReceived()
         {
             using (var context = CreateInMemoryContext())
             {
@@ -64,6 +66,25 @@ namespace FitSync_Tests
 
                 Assert.Contains(exercises, e => e.Name == testExercise.Name);
             }
+        }
+
+
+        [Fact]
+
+        public async Task CheckIfExerciseIsSuccessfullyDeleted()
+        {
+            using (var context = CreateInMemoryContext())
+            {
+                context.Add(new Exercise() { Id = 1, Name = "ExerciseToDelete", Difficulty = "Test", MuscleId = 2});
+                context.SaveChanges();
+
+                ExercisesController exercisesController = new ExercisesController(context);
+
+                await exercisesController.DeleteExercise(1);
+
+                Assert.DoesNotContain(context.Exercise, e => e.Name == "ExerciseToDelete");
+            }
+
         }
     }
 }

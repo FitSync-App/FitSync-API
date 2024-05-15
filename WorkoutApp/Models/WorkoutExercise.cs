@@ -60,11 +60,6 @@ public static class WorkoutExerciseEndpoints
 
             group.MapPost("/", async (WorkoutExercise workoutExercise, DatabaseContext db) =>
             {
-                // Remove the following lines to prevent adding workout and exercise to the database
-                // db.Workout_Exercise.Add(workoutExercise);
-                // await db.SaveChangesAsync();
-
-                // Your existing code to return the created workout exercise
                 return TypedResults.Created($"/api/WorkoutExercise/{workoutExercise.Id}", workoutExercise);
             })
     .WithName("CreateWorkoutExercise")
