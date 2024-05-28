@@ -50,6 +50,30 @@ namespace Fitsync.Controllers
             return workout;
         }
 
+        [HttpGet("ByName/{name}")]
+        public async Task<ActionResult<int>> GetWorkoutIdByName(string name)
+        {
+            try
+            {
+                var workoutId = await _context.Workout
+                    .Where(w => w.Name == name)
+                    .Select(w => w.Id)
+                    .FirstOrDefaultAsync();
+
+                if (workoutId == 0)
+                {
+                    return NotFound();
+                }
+
+                return workoutId;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
+
+
         // PUT: api/Workout/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
