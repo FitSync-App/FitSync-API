@@ -146,6 +146,8 @@ namespace Fitsync.Controllers
                     ExerciseName = we.Exercise.Name,
                     ExerciseDifficulty = we.Exercise.Difficulty,
                     ExerciseDescription = we.Exercise.Description,
+                    ExerciseSets = we.Sets,
+                    ExerciseReps = we.Reps,
                     Equipment = _context.Equipment
                         .Where(e => e.Id == we.Exercise.EquipmentId)
                         .Select(e => e.Name)
